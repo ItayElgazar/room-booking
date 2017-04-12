@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-lg-10 col-lg-offset-1 col-xs-12 ">
+        <aside class="panel panel-default">
+
+            <div class="panel-body text-center">
+                <section class="home__flex">
+                    <i class="fa fa-arrow-left" ng-click="vm.setYestardayDate()" aria-hidden="true"></i>
+                    <aside>
+                        <h1>{{vm.settings.selectedDate | date: 'dd.MM.yyyy '}}</h1>
+                    </aside>
+                    <i class="fa fa-arrow-right" ng-click="vm.setTomorrowDate()" aria-hidden="true"></i>
+                </section>
+            </div>
+
+            <section class="panel-footer">
+                <aside class="input-group col-lg-6 col-lg-offset-3">
+                    <span class="input-group-addon">Filter</span><input type="text" ng-model="vm.query[name]" class="form-control" placeholder="Room Name">
+                    <span class="input-group-addon checkbox">
+                        <label><input type="checkbox" value="">Available Now</label>
+                    </span>
+                </aside>
+
+            </section>
+
+
+        </aside>
+        <room ng-repeat="room in vm.rooms | filter: vm.query[name]" selected-date="vm.settings.selectedDate" hours="vm.hours" room="room" on-details="vm.roomDetails(room)"></room>
+
+    </div>
+</div>

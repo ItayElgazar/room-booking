@@ -1,0 +1,54 @@
+.timeline {
+
+  
+  &__step {
+    vertical-align: middle;
+    display: inline-block;
+    background: #e32e1f;
+    color: white;
+    text-align: center;
+    width: 15px;
+    min-height: 15px;
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    cursor:pointer;
+
+    span {
+
+      display: none;
+    }
+    &.selected__between {
+      background:#FFE900 !important;
+    }
+    &.selected__first {
+       border-right:5px solid #00A0DB;
+       background:#FFE900 !important;
+       span{
+         display:block;
+       }
+       width:50px;
+    }
+
+    &.selected__second {
+       border-left:5px solid #00A0DB;
+       background:#FFE900 !important;
+       span{
+         display:block;
+       }
+       width:50px;
+    }
+
+
+    
+
+    &.available {
+      background: #009547;
+    }
+    &:hover {
+      width: 50px;
+      span {
+        display: block;
+      }
+    }
+  }
+    
+}

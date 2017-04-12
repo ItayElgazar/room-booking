@@ -1,0 +1,78 @@
+<div class="summery__description" ng-if="!vm.modal">
+    <section class="panel panel-default">
+        <aside class="panel-body">
+            <h4>Room {{vm.room.name}}</h4>
+            <timeline availablity="vm.room.avail"></timeline>
+            <br />
+            <section class="row" ng-if="vm.room.selectedHours.length > 0">
+                <!-- booking section -->
+                
+                <div class="col-lg-4 col-lg-offset-1">
+                    <p>Booking <strong>{{vm.room.name}}</strong> from <strong>{{vm.room.selectedHours[0].hour}}</strong> to <strong>{{vm.room.selectedHours[1].hour}}</strong></p>
+                    <p class="praticipants">Add Praticipants</p>
+                    <div class="form-group">
+                        <input type="text" ng-model="vm.praticipant.name" class="form-control" placeholder="Name">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="email" ng-model="vm.praticipant.email" class="form-control" placeholder="Email">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="phone" ng-model="vm.praticipant.number" class="form-control" placeholder="Phone number">
+                    </div>
+             
+                    <button ng-disabled="!vm.praticipant.name || !vm.praticipant.email || !vm.praticipant.number" ng-click="vm.addPraticipant()" class="btn btn-warning">Add</button>
+                </div>
+
+                <ul class="list-group col-lg-4 col-lg-offset-1">
+                <li ng-repeat="praticipant in vm.praticipants" class="list-group-item justify-content-between">
+                        {{praticipant.name}}
+                        <span ng-click="vm.removePraticipant(praticipant)" class="badge badge-default badge-pill">X</span>
+                </li>
+                   
+                    
+                </ul>
+
+                <div class="col-lg-11 text-right">
+                    <button ng-disabled="vm.praticipants.length == 0" ng-click="vm.bookRoom()" class="btn btn-primary">Book</button>
+                </div>
+
+                <!-- booking section /-->
+            </section>
+
+            <!-- <div class="summery__details">
+            <h2>Room name: {{vm.room.name}}</h2>
+            <h2>Location:{{vm.room.location}}</h2>
+            <h2>Size:{{vm.room.size}}</h2>
+            <h2>Photo: {{vm.room.images[0]}}</h2>
+        </div> -->
+            </aisde>
+    </section>
+</div>
+
+
+
+<pop id="room-{{vm.room.name}}">
+    <div class="pop">
+        <div class="pop-body">
+            <button class="room__btn--close" ng-click="vm.closeModal('room-'+vm.room.name);"></button>
+            <div class="wrap">
+                <div class="room__page">
+                    <h1>Room {{vm.room.name}}</h1>
+                    <h2 class="room__title">Location:{{vm.room.location}}</h2>
+                    <h3 class="room__title">Size:{{vm.room.size}}</h3>
+                    <h1>Equipment:</h1>
+                    <ul class="room__equipment">
+                        <li ng-repeat="item in vm.room.equipment">{{item}}</li>
+                    </ul>
+                    <h1>Capacity: {{vm.room.capacity}}</h1>
+                </div>
+                <div class="room__gallery">
+                    <img ng-repeat="image in vm.room.images" src="image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pop-background"></div>
+</pop>

@@ -1,0 +1,39 @@
+pop {
+  display: none;
+}
+  .pop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    overflow: auto;
+
+    .pop-body {
+      padding: 20px;
+      background: #fff;
+      margin: 40px auto;
+      max-width: 55%;
+      text-align: center;
+    }
+  }
+
+  .pop-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-color: #000;
+    opacity: 0.5;
+
+    z-index: 900;
+  }
+
+body.pop-open {
+  overflow: hidden;
+}

@@ -1,0 +1,153 @@
+h1 {
+  font-size: 42px; }
+
+.home {
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+  .home__flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 42px; }
+  .home__md {
+    font-size: 34px; }
+
+.fa:hover {
+  color: #00A0DB; }
+
+pop {
+  display: none; }
+
+.pop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto; }
+  .pop .pop-body {
+    padding: 20px;
+    background: #fff;
+    margin: 40px auto;
+    max-width: 55%;
+    text-align: center; }
+
+.pop-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 900; }
+
+body.pop-open {
+  overflow: hidden; }
+
+.summery {
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+  .summery__title {
+    margin: 5px 0;
+    font-size: 24px;
+    color: gray; }
+  .summery__description {
+    position: relative; }
+    .summery__description h2 {
+      padding: 5px;
+      text-align: center;
+      display: inline-block;
+      font-size: 18px;
+      margin: 5px 0;
+      background: #c5c5c5;
+      color: white; }
+  .summery__step {
+    vertical-align: middle;
+    display: inline-block;
+    background: #e32e1f;
+    color: white;
+    text-align: center;
+    width: 15px;
+    min-height: 15px;
+    border-right: 1px solid rgba(255, 255, 255, 0.5); }
+    .summery__step span {
+      display: none; }
+    .summery__step:hover {
+      width: 70px; }
+      .summery__step:hover span {
+        display: block; }
+      .summery__step:hover .timeline__step:nth-child(1) {
+        width: 15px; }
+        .summery__step:hover .timeline__step:nth-child(1) span {
+          display: none; }
+  .summery__avail {
+    vertical-align: middle;
+    display: inline-block;
+    background: green;
+    color: white;
+    text-align: center;
+    width: 15px;
+    min-height: 15px;
+    border-right: 1px solid rgba(255, 255, 255, 0.5); }
+    .summery__avail span {
+      display: none; }
+    .summery__avail:hover {
+      width: 70px; }
+      .summery__avail:hover span {
+        display: block; }
+      .summery__avail:hover .timeline__step:nth-child(1) {
+        width: 15px; }
+        .summery__avail:hover .timeline__step:nth-child(1) span {
+          display: none; }
+  .summery__availability {
+    margin: 5px 0;
+    font-size: 38px;
+    display: block; }
+  .summery__btn {
+    position: absolute;
+    right: 20px;
+    top: 25%;
+    border: none;
+    background: none;
+    height: 50%;
+    width: 125px; }
+
+.praticipants {
+  font-weight: bold; }
+
+.timeline__step {
+  vertical-align: middle;
+  display: inline-block;
+  background: #e32e1f;
+  color: white;
+  text-align: center;
+  width: 15px;
+  min-height: 15px;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer; }
+  .timeline__step span {
+    display: none; }
+  .timeline__step.selected__between {
+    background: #FFE900 !important; }
+  .timeline__step.selected__first {
+    border-right: 5px solid #00A0DB;
+    background: #FFE900 !important;
+    width: 50px; }
+    .timeline__step.selected__first span {
+      display: block; }
+  .timeline__step.selected__second {
+    border-left: 5px solid #00A0DB;
+    background: #FFE900 !important;
+    width: 50px; }
+    .timeline__step.selected__second span {
+      display: block; }
+  .timeline__step.available {
+    background: #009547; }
+  .timeline__step:hover {
+    width: 50px; }
+    .timeline__step:hover span {
+      display: block; }

@@ -1,0 +1,30 @@
+{
+  "name": "task",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Itay Elgazar"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "dist/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.4",
+    "angular-animate": "^1.5.9",
+    "angular-toastr": "^2.1.1",
+    "angular-ui-router": "^0.3.2",
+    "ngstorage": "^0.3.11",
+    "bootstrap": "^3.3.7",
+    "angularjs-slider": "^5.9.0",
+    "ng-marviluz": "ng-material#^0.0.4",
+    "angular-material": "^1.1.3",
+    "components-font-awesome": "^4.7.0"
+  }
+}
