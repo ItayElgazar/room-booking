@@ -21,7 +21,7 @@
                     <p class="praticipants">Add Praticipants</p>
             
                         <div class="form-group">
-                            <input type="text" ng-model="vm.praticipant.name" class="form-control" placeholder="Name">
+                            <input type="text" ng-model="vm.praticipant.name" class="form-control" placeholder="Name" ng-required="true">
                         </div>
 
                         <div class="form-group">
@@ -29,14 +29,14 @@
                                 Invalid email
                             </span>
                             <input type="email" name="emailInput" ng-model="vm.praticipant.email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" class="form-control"
-                                placeholder="Email">
+                                placeholder="Email" ng-required="true">
                         </div>
 
                         <div class="form-group">
                             <span class="error" ng-show="myForm.numberInput.$error.pattern">
                                 Invalid phone number
                             </span>
-                            <input type="phone" name="numberInput" ng-model="vm.praticipant.number"  class="form-control" placeholder="Phone number">
+                            <input type="phone" name="numberInput" ng-model="vm.praticipant.number"  class="form-control" placeholder="Phone number" ng-required="true">
                         </div>
 
                         <button ng-disabled="!vm.praticipant.name || (!vm.praticipant.email && myForm.emailInput.$error.pattern) || (!vm.praticipant.number && myForm.numberInput.$error.pattern)" ng-click="vm.addPraticipant()"
@@ -46,11 +46,11 @@
                 <div class="col-lg-6">
                    <div class="margin-top"></div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Event title">
+                        <input type="text" ng-model="vm.booking.title" class="form-control" placeholder="Event title" ng-required="true">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Event description">
+                        <input type="text" ng-model="vm.booking.description" class="form-control" placeholder="Event description" ng-required="true">
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                 </ul>
                 
                 <div class="col-lg-11 text-right">
-                    <button ng-disabled="vm.praticipants.length == 0" ng-click="vm.bookRoom()" class="btn btn-primary">Book</button>
+                    <button ng-disabled="vm.praticipants.length == 0 || !vm.booking.title || !vm.booking.description" ng-click="vm.bookRoom()" class="btn btn-primary">Book</button>
                 </div>
                 
              

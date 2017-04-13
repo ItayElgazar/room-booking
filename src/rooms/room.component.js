@@ -21,6 +21,7 @@
                 vm.modal = false;
                 vm.praticipants = [];
                 vm.praticipant = {};
+                vm.booking = {};
                 ///////////////
             
                 $scope.$on('onAvailabillityBookingEvent',onAvailabillityBooking);
@@ -37,14 +38,21 @@
                         let end = roomsService.filterDateToTimestamp(date,splitTime(vm.room.selectedHours[1].hour));
                         let name = vm.room.name;
                         let praticipants = angular.toJson(vm.praticipants);
+                        let title = vm.booking.title;
+                        let desc = vm.booking.description;
+                        console.log(title,desc);
 
                         let bookingSechma = new Booking({
+                            "title": title,
+                            "description": desc,
                             "date": roomsService.filterDateToTimestamp(date,false),
                             "start": start,
                             "end": end,
                             "name": name,
                             "praticipants": JSON.parse(praticipants)
                         });
+
+                        console.log(bookingSechma);
                         
                         roomsService.sendPass(bookingSechma)
                         .then((res)=>{
@@ -83,8 +91,8 @@
                         date: booking.date,
                         "time_start": booking.start,
                         "time_end": booking.end,
-                        "title": "Booking Title!",
-                        "description": "Booking description",
+                        "title": booking.title,
+                        "description": booking.description,
                         "room": booking.name
                         },
                         "passes": booking.praticipants

@@ -22,33 +22,6 @@
 (function () {
     'use strict';
 
-    angular.module('app').config(unauthorisedInterceptor);
-
-    function unauthorisedInterceptor($provide, $httpProvider) {
-        /**
-         * @desc If a response from an HTTP request comes back as unauthorized
-         *       it means that the token has expired/is invalid, and the user is redirected to the login screen
-         */
-        $provide.factory('unauthorisedInterceptor', ['$q', function ($q) {
-            return {
-                'responseError': function responseError(rejection) {
-                    if (rejection.status === 401) {
-                        window.location.href = '/#/auth/login';
-                    }
-
-                    return $q.reject(rejection);
-                }
-            };
-        }]);
-
-        $httpProvider.interceptors.push('unauthorisedInterceptor');
-    }
-})();
-'use strict';
-
-(function () {
-    'use strict';
-
     angular.module('app').config(route);
 
     function route($stateProvider, $urlRouterProvider) {
@@ -246,6 +219,7 @@
             vm.modal = false;
             vm.praticipants = [];
             vm.praticipant = {};
+            vm.booking = {};
             ///////////////
 
             $scope.$on('onAvailabillityBookingEvent', onAvailabillityBooking);
@@ -261,14 +235,21 @@
                     var end = roomsService.filterDateToTimestamp(date, splitTime(vm.room.selectedHours[1].hour));
                     var name = vm.room.name;
                     var praticipants = angular.toJson(vm.praticipants);
+                    var title = vm.booking.title;
+                    var desc = vm.booking.description;
+                    console.log(title, desc);
 
                     var bookingSechma = new Booking({
+                        "title": title,
+                        "description": desc,
                         "date": roomsService.filterDateToTimestamp(date, false),
                         "start": start,
                         "end": end,
                         "name": name,
                         "praticipants": JSON.parse(praticipants)
                     });
+
+                    console.log(bookingSechma);
 
                     roomsService.sendPass(bookingSechma).then(function (res) {
                         if (res.success) {
@@ -307,8 +288,8 @@
                         date: booking.date,
                         "time_start": booking.start,
                         "time_end": booking.end,
-                        "title": "Booking Title!",
-                        "description": "Booking description",
+                        "title": booking.title,
+                        "description": booking.description,
                         "room": booking.name
                     },
                     "passes": booking.praticipants
