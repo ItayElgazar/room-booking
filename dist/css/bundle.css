@@ -119,6 +119,9 @@ body.pop-open {
 .praticipants {
   font-weight: bold; }
 
+.error {
+  color: #e32e1f; }
+
 .timeline__step {
   vertical-align: middle;
   display: inline-block;

@@ -3,13 +3,16 @@
     angular.module('app.home')
         .controller('Home', Home);
 
-    function Home($state, $scope, roomsService) {
+    function Home($state, $scope, messageService, roomsService) {
         let vm = this;
-        let today = new Date();
+        let selectedDate = new Date();
+        let todayDate = new Date();
         vm.rooms = [];
         vm.query = {};
         vm.settings = {
-            'selectedDate': today
+            'selectedDate': selectedDate,
+            'todayDate': todayDate,
+            'loading': true
         };
 
         vm.roomsByDate = getRoomsByDate;
@@ -25,6 +28,14 @@
             let timestamp = roomsService.filterDateToTimestamp(date,false);
             roomsService.getRoomsByDate(timestamp).then(rooms => {
                 vm.rooms = rooms;
+                console.log(rooms);
+            }).finally((done)=>{
+                console.log(done);
+                vm.settings.loading = false;
+            }).catch((reject)=>{
+                console.log(reject);
+               messageService.error("Please check your internet connection" + reject);
+                
             });
         }
 
@@ -37,8 +48,10 @@
 
         function setYestardayDate() {
             let selectedDate = vm.settings.selectedDate;
-            selectedDate = selectedDate.setDate(selectedDate.getDate() - 1);
-            getRoomsByDate(selectedDate);
+            if(selectedDate > vm.settings.todayDate) {
+                selectedDate = selectedDate.setDate(selectedDate.getDate() - 1);
+                getRoomsByDate(selectedDate);
+            }
         }
 
     }

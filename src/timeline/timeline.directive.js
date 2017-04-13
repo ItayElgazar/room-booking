@@ -17,8 +17,14 @@
                     filterRoomAvailabillity();
                     ///////////////////
 
+                    $scope.$on('roomBooking', onRoomBooking);
+                    function onRoomBooking(event,data) {
+                        if(data.isBooked) {
+                            vm.selectedHours = [];
+                        }
+                    }
+
                     $scope.$watch('availablity', onAvailabillityChanges);
-                    
                     function onAvailabillityChanges(current,original) {
                         $scope.availablity = current;
                         vm.selectedHours = [];

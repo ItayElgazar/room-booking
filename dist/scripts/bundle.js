@@ -73,13 +73,16 @@
 
     angular.module('app.home').controller('Home', Home);
 
-    function Home($state, $scope, roomsService) {
+    function Home($state, $scope, messageService, roomsService) {
         var vm = this;
-        var today = new Date();
+        var selectedDate = new Date();
+        var todayDate = new Date();
         vm.rooms = [];
         vm.query = {};
         vm.settings = {
-            'selectedDate': today
+            'selectedDate': selectedDate,
+            'todayDate': todayDate,
+            'loading': true
         };
 
         vm.roomsByDate = getRoomsByDate;
@@ -95,6 +98,13 @@
             var timestamp = roomsService.filterDateToTimestamp(date, false);
             roomsService.getRoomsByDate(timestamp).then(function (rooms) {
                 vm.rooms = rooms;
+                console.log(rooms);
+            }).finally(function (done) {
+                console.log(done);
+                vm.settings.loading = false;
+            }).catch(function (reject) {
+                console.log(reject);
+                messageService.error("Please check your internet connection" + reject);
             });
         }
 
@@ -106,8 +116,10 @@
 
         function setYestardayDate() {
             var selectedDate = vm.settings.selectedDate;
-            selectedDate = selectedDate.setDate(selectedDate.getDate() - 1);
-            getRoomsByDate(selectedDate);
+            if (selectedDate > vm.settings.todayDate) {
+                selectedDate = selectedDate.setDate(selectedDate.getDate() - 1);
+                getRoomsByDate(selectedDate);
+            }
         }
     }
 })();
@@ -224,7 +236,7 @@
         },
         templateUrl: 'views/room.component.html',
         controllerAs: 'vm',
-        controller: function controller($scope, roomsService, ModalService) {
+        controller: function controller($scope, roomsService, messageService, ModalService) {
             var vm = this;
             vm.openModal = openModal;
             vm.closeModal = closeModal;
@@ -262,7 +274,18 @@
                         if (res.success) {
                             vm.room.selectedHours = [];
                             vm.praticipants = [];
-                        } else {}
+                            $scope.$broadcast('roomBooking', {
+                                isBooked: true
+                            });
+                            messageService.success(vm.room.name + " has been booked!");
+                        } else {
+                            console.log(res);
+                            messageService.error("Please check all the fields and try again");
+                        }
+                    }).catch(function (reject) {
+                        console.log(reject);
+                        console.log('rejected');
+                        messageService.error("Please check your internet connection");
                     });
                 }
             }
@@ -345,8 +368,6 @@
             }).then(function (res) {
                 AVAIL_ROOMS = res.data;
                 return res.data;
-            }).catch(function (e) {
-                console.log(e);
             });
         }
 
@@ -414,6 +435,8 @@
         function success(message) {
             toastr.success(message);
         }
+
+        function errorHandler(err_code) {}
     }
 })();
 'use strict';
@@ -436,8 +459,14 @@
                 filterRoomAvailabillity();
                 ///////////////////
 
-                $scope.$watch('availablity', onAvailabillityChanges);
+                $scope.$on('roomBooking', onRoomBooking);
+                function onRoomBooking(event, data) {
+                    if (data.isBooked) {
+                        vm.selectedHours = [];
+                    }
+                }
 
+                $scope.$watch('availablity', onAvailabillityChanges);
                 function onAvailabillityChanges(current, original) {
                     $scope.availablity = current;
                     vm.selectedHours = [];

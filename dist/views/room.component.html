@@ -6,47 +6,71 @@
             <br />
             <section class="row" ng-if="vm.room.selectedHours.length > 0">
                 <!-- booking section -->
-                
-                <div class="col-lg-4 col-lg-offset-1">
-                    <p>Booking <strong>{{vm.room.name}}</strong> from <strong>{{vm.room.selectedHours[0].hour}}</strong> to <strong>{{vm.room.selectedHours[1].hour}}</strong></p>
+
+            <div class="col-lg-4 col-lg-offset-1">
+                <form name="myForm">
+                    <p>Booking <strong>{{vm.room.name}}</strong> from <strong>{{vm.room.selectedHours[0].hour}}</strong> to
+                        <strong>{{vm.room.selectedHours[1].hour}}</strong></p>
                     <p class="praticipants">Add Praticipants</p>
+            
+                        <div class="form-group">
+                            <input type="text" ng-model="vm.praticipant.name" class="form-control" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <span class="error" ng-show="myForm.emailInput.$error.pattern">
+                                Invalid email
+                            </span>
+                            <input type="email" name="emailInput" ng-model="vm.praticipant.email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" class="form-control"
+                                placeholder="Email">
+                        </div>
+
+                        <div class="form-group">
+                            <span class="error" ng-show="myForm.numberInput.$error.pattern">
+                                Invalid phone number
+                            </span>
+                            <input type="phone" name="numberInput" ng-model="vm.praticipant.number"  class="form-control" placeholder="Phone number">
+                        </div>
+
+                        <button ng-disabled="!vm.praticipant.name || (!vm.praticipant.email && myForm.emailInput.$error.pattern) || (!vm.praticipant.number && myForm.numberInput.$error.pattern)" ng-click="vm.addPraticipant()"
+                            class="btn btn-warning">Add</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <p>Event title about <strong>{{vm.room.name}}</strong> </p>
+                    <br />
                     <div class="form-group">
-                        <input type="text" ng-model="vm.praticipant.name" class="form-control" placeholder="Name">
+                        <input type="text" class="form-control" placeholder="Event title">
                     </div>
 
                     <div class="form-group">
-                        <input type="email" ng-model="vm.praticipant.email" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" placeholder="Event description">
                     </div>
-
-                    <div class="form-group">
-                        <input type="phone" ng-model="vm.praticipant.number" class="form-control" placeholder="Phone number">
-                    </div>
-             
-                    <button ng-disabled="!vm.praticipant.name || !vm.praticipant.email || !vm.praticipant.number" ng-click="vm.addPraticipant()" class="btn btn-warning">Add</button>
                 </div>
 
                 <ul class="list-group col-lg-4 col-lg-offset-1">
-                <li ng-repeat="praticipant in vm.praticipants" class="list-group-item justify-content-between">
+                    <li ng-repeat="praticipant in vm.praticipants" class="list-group-item justify-content-between">
                         {{praticipant.name}}
                         <span ng-click="vm.removePraticipant(praticipant)" class="badge badge-default badge-pill">X</span>
-                </li>
-                   
-                    
-                </ul>
+                    </li>
 
+                </ul>
+                
                 <div class="col-lg-11 text-right">
                     <button ng-disabled="vm.praticipants.length == 0" ng-click="vm.bookRoom()" class="btn btn-primary">Book</button>
                 </div>
+                
+             
 
                 <!-- booking section /-->
             </section>
 
-            <!-- <div class="summery__details">
+             <div class="summery__details">
             <h2>Room name: {{vm.room.name}}</h2>
             <h2>Location:{{vm.room.location}}</h2>
             <h2>Size:{{vm.room.size}}</h2>
-            <h2>Photo: {{vm.room.images[0]}}</h2>
-        </div> -->
+            
+        </div> 
             </aisde>
     </section>
 </div>

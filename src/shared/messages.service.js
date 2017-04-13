@@ -32,5 +32,9 @@
         function success(message){
             toastr.success(message);
         }
+
+        function errorHandler(err_code) {
+          
+        }
     }
 })();

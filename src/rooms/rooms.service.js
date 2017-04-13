@@ -32,9 +32,7 @@
             }).then(res => {
                 AVAIL_ROOMS = res.data;
                 return res.data;
-            }).catch(e => {
-                console.log(e);
-            })
+            });
         }
         
         function sendPass(booking) {

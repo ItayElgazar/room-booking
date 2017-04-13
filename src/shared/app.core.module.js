@@ -8,6 +8,7 @@
     'ngStorage', 
     'ngAnimate',
     'ngMaterial',
+    'cgBusy',
     //3rd party modules
     'ui.router',
     'toastr'

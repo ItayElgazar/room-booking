@@ -11,7 +11,7 @@
             },
             templateUrl: 'views/room.component.html',
             controllerAs: 'vm',
-            controller: function ($scope,roomsService,ModalService) {
+            controller: function ($scope, roomsService, messageService, ModalService) {
                 var vm = this;
                 vm.openModal = openModal;
                 vm.closeModal = closeModal;
@@ -51,9 +51,18 @@
                            if(res.success) {
                                vm.room.selectedHours = [];
                                vm.praticipants = [];
+                               $scope.$broadcast('roomBooking', {
+                                    isBooked: true
+                                });
+                               messageService.success(vm.room.name + " has been booked!");
                            } else {
-
+                               console.log(res);
+                                messageService.error("Please check all the fields and try again");
                            }
+                        }).catch((reject)=>{
+                                console.log(reject);
+                                console.log('rejected');
+                                messageService.error("Please check your internet connection");
                         });
 
                     }
