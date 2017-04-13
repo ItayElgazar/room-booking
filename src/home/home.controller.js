@@ -3,6 +3,7 @@
     angular.module('app.home')
         .controller('Home', Home);
 
+    Home.$inject = ['$state','$scope','messageService','roomsService'];
     function Home($state, $scope, messageService, roomsService) {
         let vm = this;
         let selectedDate = new Date();
