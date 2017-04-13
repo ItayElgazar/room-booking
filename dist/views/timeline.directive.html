@@ -1,7 +1,7 @@
 <div class="timeline">
     <section style="display:inline-block;margin-top:40px;" ng-repeat="step in vm.roomTimeLine track by $index">
         
-        <div style="position:absolute;top:70px;font-size:12px;" ng-if="$index%4 === 0"> {{step.hour}} </div>
+        <div class="hidden-xs" style="position:absolute;top:80px;font-size:12px;" ng-if="$index%4 === 0"> {{step.hour}} </div>
 
         <aside ng-click="vm.selectHours(step)" ng-if="$index%4 === 0" style="margin-left:1px;" ng-class="{available: step.availablity, 
         selected__between:step.hour > vm.selectedHours[0].hour && step.hour < vm.selectedHours[1].hour,

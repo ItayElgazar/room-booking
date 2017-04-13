@@ -116,8 +116,19 @@ body.pop-open {
     height: 50%;
     width: 125px; }
 
+.gallery {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  padding-left: 5px; }
+
 .praticipants {
   font-weight: bold; }
+
+.margin-top {
+  margin-top: 60px; }
 
 .error {
   color: #e32e1f; }
